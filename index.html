@@ -1,0 +1,64 @@
+<!doctype html>
+
+<html lang="en" ng-app="VSTDA">
+<head>
+  <meta charset="utf-8">
+
+  <title>Very Simple Todo App</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+  <div class="container-fluid"  ng-controller="todoApp as todoApp">
+    <div class="col-md-4">
+      <div class="panel panel-success top-buffer">
+        <div class="panel-heading">Add todo item</div>
+        <div class="panel-body">
+          <div class="form-group">
+            <label>Text:</label>
+            <input ng-modal="todoApp.todoName" type="text" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label>Priority:</label>
+            <select class="form-control">
+              <option value="" selected disabled>Please select...</option>
+              <option value="1" ng-modal="todoApp.priority">Low</option>
+              <option value="2" ng-modal="todoApp.priority">Medium</option>
+              <option value="3" ng-modal="todoApp.priority">High</option>
+            </select>
+          </div>
+        </div>
+        <div class="panel-footer"><button type="button" class="btn btn-success" ng-click="todoApp.addTodo(todoApp.todoName)">Add Item</button></div>
+      </div>
+    </div>
+    <div class="btn-group col-md-8 top-buffer" role="group" aria-label="...">
+      <div class="row">
+        <div class="col-md-8">
+          <button type="button" class="btn btn-danger">Order by highest priority</button>
+          <button type="button" class="btn btn-success">Order by lowest priority</button>
+          <button type="button" class="btn btn-info">Order alphabetically</button>
+        </div>
+      </div>
+      <div class="row top-buffer">
+        <div class="col-md-8">
+          <ul class="list-group">
+            <li ng-repeat="todo in todoApp.todos">{{todo.todoName}}</li>
+            <li class="list-group-item list-group-item-danger">High Priority</li>
+            <li class="list-group-item list-group-item-warning">Medium Priority</li>
+            <li class="list-group-item list-group-item-success">Low Priority</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
+  <script src="js/scripts.js"></script>
+</body>
+</html>
