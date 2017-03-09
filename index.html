@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html lang="en" ng-app="VSTDA">
+<html lang="en" ng-app="VSTDL">
 <head>
   <meta charset="utf-8">
 
@@ -15,44 +15,38 @@
 
 </head>
 
-<body>
-  <div class="container-fluid"  ng-controller="todoApp as todoApp">
+<body ng-controller="todoApp as todoApp">
+  <div class="container-fluid">
     <div class="col-md-4">
       <div class="panel panel-success top-buffer">
         <div class="panel-heading">Add todo item</div>
         <div class="panel-body">
           <div class="form-group">
             <label>Text:</label>
-            <input ng-modal="todoApp.todoName" type="text" class="form-control" />
+            <input ng-model="todoApp.todoName" type="text" class="form-control" />
           </div>
           <div class="form-group">
             <label>Priority:</label>
-            <select class="form-control">
+            <select class="form-control" ng-model="todoApp.priority" ng-options="priority[0] for priority in todoApp.priorities">
               <option value="" selected disabled>Please select...</option>
-              <option value="1" ng-modal="todoApp.priority">Low</option>
-              <option value="2" ng-modal="todoApp.priority">Medium</option>
-              <option value="3" ng-modal="todoApp.priority">High</option>
             </select>
           </div>
         </div>
-        <div class="panel-footer"><button type="button" class="btn btn-success" ng-click="todoApp.addTodo(todoApp.todoName)">Add Item</button></div>
+        <div class="panel-footer"><button type="button" class="btn btn-success" ng-click="todoApp.addTodo()">Add Item</button></div>
       </div>
     </div>
     <div class="btn-group col-md-8 top-buffer" role="group" aria-label="...">
       <div class="row">
         <div class="col-md-8">
-          <button type="button" class="btn btn-danger">Order by highest priority</button>
-          <button type="button" class="btn btn-success">Order by lowest priority</button>
-          <button type="button" class="btn btn-info">Order alphabetically</button>
+          <button type="button" class="btn btn-danger" ng-click="todoApp.byHigh()">Order by highest priority</button>
+          <button type="button" class="btn btn-success" ng-click="todoApp.byLow()">Order by lowest priority</button>
+          <button type="button" class="btn btn-info" ng-click="todoApp.byAlphabet()">Order alphabetically</button>
         </div>
       </div>
       <div class="row top-buffer">
         <div class="col-md-8">
           <ul class="list-group">
-            <li ng-repeat="todo in todoApp.todos">{{todo.todoName}}</li>
-            <li class="list-group-item list-group-item-danger">High Priority</li>
-            <li class="list-group-item list-group-item-warning">Medium Priority</li>
-            <li class="list-group-item list-group-item-success">Low Priority</li>
+            <li ng-repeat="todo in todoApp.todos | orderBy: todoApp.order" class={{todo[2]}}>{{todo[0]}}</li>
           </ul>
         </div>
       </div>
