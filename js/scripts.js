@@ -2,7 +2,7 @@ angular.module('VSTDL', []);
 
 angular
 	.module('VSTDL')
-	.controller('todoApp', todoApp);
+	.controller('TodoApp', todoApp);
 
 function todoApp() {
 
@@ -13,7 +13,7 @@ function todoApp() {
 	vm.todos = [];
 
 	// Array of options with their priority value and styling
-	vm.priorities=[
+	vm.priorities = [
 		["High", 1, "list-group-item list-group-item-danger"],
 		["Medium", 2, "list-group-item list-group-item-warning"],
 		["Low", 3, "list-group-item list-group-item-success"]
